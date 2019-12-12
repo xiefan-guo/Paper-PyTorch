@@ -7,6 +7,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 from models import *
+from datasets import *
 
 import torchvision.transforms as transforms
 from torchvision.utils import save_image
@@ -40,18 +41,23 @@ print(device)
 # --------------
 # Dataset loader
 # --------------
-transform_ = [
+transforms_ = [
     transforms.Resize((opt.img_size, opt.img_size), Image.BICUBIC),
     transforms.ToTensor(),
     transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
 ]
 dataloader = DataLoader(
-
+    dataset=ImageDataset("../../data/%s" % opt.dataset_name, transforms_=transforms_),
+    batch_size=opt.batch_size,
+    shuffle=True,
+    num_workers=opt.n_cpu
 )
 test_dataloader = DataLoader(
-    
+    dataset=ImageDataset("../../data/%s" % opt.dataset_name, transforms_=transforms_, mode="val"),
+    batch_size=12,
+    shuffle=True,
+    num_workers=1,
 )
-
 
 def weight_init_normal(m):
     classname = m.__class__.__name__
@@ -77,3 +83,4 @@ pixelwise_loss = nn.L1Loss()
 # Optimizers
 optimizer_G = torch.optim.Adam(generator.parameters(), lr=opt.lr, betas=(opt.b1, opt.b2))
 optimizer_D = torch.optim.Adam(discriminator.parameters(), lr=opt.lr, betas=(opt.b1, opt.b2))
+

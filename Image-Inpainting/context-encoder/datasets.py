@@ -2,6 +2,9 @@ import glob
 import os
 import random
 
+import numpy as np
+from PIL import Image
+
 from torch.utils.data import Dataset
 import torchvision.transforms as transforms
 
@@ -14,4 +17,37 @@ class ImageDataset(Dataset):
         self.mode = mode
         self.files = sorted(glob.glob("%s/*.jpg" % root))
         self.files = self.files[:-4000] if mode == "train" else self.files[-4000:]
+
+    def apply_random_mask(self, img):
+        """Randomly masks image"""
+        y1, x1 = np.random.randint(0, self.img_size - self.mask_size, 2)  # Return two random numbers in [l, R]
+        y2, x2 = self.mask_size + y1, self.mask_size + x1
+        masked_part = img[:, y1:y2, x1:x2]
+        masked_img = img.clone()
+        masked_img[:, y1:y2, x1:x2] = 1
+
+        return masked_img, masked_part
+
+    def apply_center_mask(self, img):
+        """Mask center part of image"""
+        i = (self.img_size - self.mask_size) // 2
+        masked_img = img.clone()
+        masked_img[:, i:i + self.mask_size, i:i + self.mask_size] = 1
+
+        return masked_img, i
+
+    def __getitem__(self, index):
+        img = Image.open(self.files[index % len(self.files)])
+        img = self.transform(img)
+        if self.mode == "train":
+            # For training data perform random mask
+            masked_img, aux = self.apply_random_mask(img)
+        else:
+            # For test data mask the center of the image
+            masked_img, aux = self.apply_center_mask(img)
+
+        return img, masked_img, aux
+
+    def __len__(self):
+        return len(self.files)
 
