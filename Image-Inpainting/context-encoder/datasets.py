@@ -16,7 +16,7 @@ class ImageDataset(Dataset):
         self.mask_size = mask_size
         self.mode = mode
         self.files = sorted(glob.glob("%s/*.jpg" % root))
-        self.files = self.files[:-4000] if mode == "train" else self.files[-4000:]
+        self.files = self.files[:-480] if mode == "train" else self.files[-480:]
 
     def apply_random_mask(self, img):
         """Randomly masks image"""

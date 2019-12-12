@@ -7,31 +7,31 @@ class Generator(nn.Module):
     def __init__(self, channels=3):
         super(Generator, self).__init__()
 
-        def conv(in_feat, out_feat, bn=True):
-            layers = [nn.Conv2d(in_feat, out_feat, 4, 2, 1)]
+        def conv(in_feat, out_feat, stride_, padding_, bn=True):
+            layers = [nn.Conv2d(in_feat, out_feat, 4, stride=stride_, padding=padding_)]
             if bn:
-                layers.append(nn.BatchNorm2d(out_feat))
+                layers.append(nn.BatchNorm2d(out_feat, eps=0.8))
             layers.append(nn.LeakyReLU(0.2))
             return layers
 
-        def uconv(in_feat, out_feat, bn=True):
-            layers = [nn.ConvTranspose2d(in_feat, out_feat, 4, 2, 1)]
+        def uconv(in_feat, out_feat, stride_, padding_, bn=True):
+            layers = [nn.ConvTranspose2d(in_feat, out_feat, 4, stride=stride_, padding=padding_)]
             if bn:
-                layers.append(nn.BatchNorm2d(out_feat))
+                layers.append(nn.BatchNorm2d(out_feat, eps=0.8))
             layers.append(nn.ReLU())
             return layers
 
         self.model = nn.Sequential(
-            *conv(channels, 64, bn=False),
-            *conv(64, 64),
-            *conv(64, 128),
-            *conv(128, 256),
-            *conv(256, 512),
-            nn.Conv2d(512, 4000, 4),  # mark
-            *uconv(4000, 512),
-            *uconv(512, 256),
-            *uconv(256, 128),
-            *uconv(128, 64),
+            *conv(channels, 64, 2, 1, bn=False),
+            *conv(64, 64, 2, 1),
+            *conv(64, 128, 2, 1),
+            *conv(128, 256, 2, 1),
+            *conv(256, 512, 2, 1),
+            *conv(512, 4000, 1, 0),  # mark
+            *uconv(4000, 512, 1, 0),
+            *uconv(512, 256, 2, 1),
+            *uconv(256, 128, 2, 1),
+            *uconv(128, 64, 2, 1),
             nn.ConvTranspose2d(64, channels, 4, 2, 1),  # mark
             nn.Tanh()
         )
@@ -63,7 +63,7 @@ class Discriminator(nn.Module):
 
     def forward(self, img):
         img = self.model(img)
-        return img
+        return img.view(-1, 1)
 
     # ------------------parallel computing------------------------------------------------
     # def forward(self, img):

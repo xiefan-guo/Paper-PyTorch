@@ -137,8 +137,9 @@ optimizer_D = torch.optim.Adam(discriminator.parameters(), lr=opt.lr, betas=(opt
 
 # Training
 for epoch in range(opt.n_epochs):
-    for i, (imgs, _) in enumerate(dataloader):
+    for i, (imgs, label) in enumerate(dataloader):
 
+        print(imgs.size())
         # Adversarial ground truths
         valid = Variable(torch.ones(imgs.size(0), 1)).to(device)
         fake = Variable(torch.zeros(imgs.size(0), 1)).to(device)
@@ -171,7 +172,7 @@ for epoch in range(opt.n_epochs):
         # Measure discriminator's ability to classify real from generated samples
         real_loss = adversarial_loss(discriminator(real_imgs), valid)
         fake_loss = adversarial_loss(discriminator(gen_imgs.detach()), fake)
-        d_loss = (real_loss + fake_loss) / 2
+        d_loss = (real_loss + fake_loss) / 2.0
 
         d_loss.backward()
         optimizer_D.step()
