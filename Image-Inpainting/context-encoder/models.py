@@ -10,14 +10,14 @@ class Generator(nn.Module):
         def conv(in_feat, out_feat, stride_, padding_, bn=True):
             layers = [nn.Conv2d(in_feat, out_feat, 4, stride=stride_, padding=padding_)]
             if bn:
-                layers.append(nn.BatchNorm2d(out_feat, eps=0.8))
+                layers.append(nn.BatchNorm2d(out_feat, 0.8))
             layers.append(nn.LeakyReLU(0.2))
             return layers
 
         def uconv(in_feat, out_feat, stride_, padding_, bn=True):
             layers = [nn.ConvTranspose2d(in_feat, out_feat, 4, stride=stride_, padding=padding_)]
             if bn:
-                layers.append(nn.BatchNorm2d(out_feat, eps=0.8))
+                layers.append(nn.BatchNorm2d(out_feat, 0.8))
             layers.append(nn.ReLU())
             return layers
 
@@ -48,7 +48,7 @@ class Discriminator(nn.Module):
         def discriminator_block(in_filters, out_filter, bn=True):
             layers = [nn.Conv2d(in_filters, out_filter, 4, 2, 1)]  # mark
             if bn:
-                layers.append(nn.BatchNorm2d(out_filter))
+                layers.append(nn.BatchNorm2d(out_filter, 0.8))
             layers.append(nn.LeakyReLU(0.2, inplace=True))
             return layers
 
