@@ -23,7 +23,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--n_epochs", type=int, default=1000, help="number of epochs of training")
 parser.add_argument("--batch_size", type=int, default=8, help="size of the batches")
 parser.add_argument("--dataset_name", type=str, default="img_align_celeba", help="name of the dataset")
-parser.add_argument("--model_path", type=str, default="model.pth", help="the parameter of dcgan")
+parser.add_argument("--model_path", type=str, default="./checkpoints/model.pth", help="the parameter of dcgan")
 parser.add_argument("--lr", type=float, default=0.0002, help="adam: learning rate")
 parser.add_argument("--b1", type=float, default=0.5, help="adam: decay of first order momentum of gradient")
 parser.add_argument("--b2", type=float, default=0.999, help="adam: decay of first order momentum of gradient")
@@ -149,7 +149,7 @@ for epoch in range(opt.n_epochs):
             "optimizer_G": optimizer_G.state_dict(),
             "optimizer_D": optimizer_D.state_dict()
         },
-        r"./checkpoints/{}".format(opt.model_path)
+        opt.model_path
     )
 
     if epoch % opt.checkpoint_interval == 0:
