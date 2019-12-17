@@ -20,7 +20,8 @@ from torch.autograd import Variable
 os.makedirs("images", exist_ok=True)
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--n_epochs", type=int, default=1000, help="number of epochs of training")
+parser.add_argument("--n_optim", type=int, default=1500, help="optim-step of training")
+parser.add_argument("--blending_steps", type=int, default=1500, help="blending_steps of training")
 parser.add_argument("--batch_size", type=int, default=8, help="size of the batches")
 parser.add_argument("--dataset_name", type=str, default="img_align_celeba", help="name of the dataset")
 parser.add_argument("--model_path", type=str, default="./checkpoints/model.pth", help="the parameter of dcgan")
@@ -76,16 +77,16 @@ for i, (imgs, masked_imgs, mask) in enumerate(train_dataloader):
 
     imgs = Variable(imgs).to(device)
     masked_imgs = Variable(masked_imgs).to(device)
+    mask = Variable(mask).to(device)
 
-
-    for epoch in range(opt.n_epochs):
+    for epoch in range(opt.n_optim):
 
         optimizer_inpaint.zero_grad()
 
         gen_imgs = generator(z_optimum)
         d_gen_imgs = discriminator(gen_imgs)
 
-        mask_weight = create_mask_weight(mask.numpy(), opt.n_size)
+        mask_weight = create_mask_weight(mask.cpu().numpy(), opt.n_size)
         mask_weight = Variable(mask_weight).to(device)
 
         c_loss = context_loss(gen_imgs, masked_imgs, mask_weight)
@@ -98,6 +99,7 @@ for i, (imgs, masked_imgs, mask) in enumerate(train_dataloader):
 
         print(
             "[Epoch %d/%d] [Batch %d/%d] [context_loss loss: %f] [prior_loss loss: %f]"
-            % (epoch, opt.n_epochs, i, len(train_dataloader), c_loss.item(), p_loss.item())
+            % (epoch, opt.n_optim, i, len(train_dataloader), c_loss.item(), p_loss.item())
         )
 
+    blended_images = posisson_blending(mask, gen_imgs.detach(), masked_imgs, opt)
