@@ -22,7 +22,7 @@ os.makedirs("images", exist_ok=True)
 parser = argparse.ArgumentParser()
 parser.add_argument("--n_optim", type=int, default=1500, help="optim-step of training")
 parser.add_argument("--blending_steps", type=int, default=1500, help="blending_steps of training")
-parser.add_argument("--batch_size", type=int, default=8, help="size of the batches")
+parser.add_argument("--batch_size", type=int, default=12, help="size of the batches")
 parser.add_argument("--dataset_name", type=str, default="img_align_celeba", help="name of the dataset")
 parser.add_argument("--model_path", type=str, default="./checkpoints/model.pth", help="the parameter of dcgan")
 parser.add_argument("--lr", type=float, default=0.0002, help="adam: learning rate")
@@ -104,3 +104,5 @@ for i, (imgs, masked_imgs, mask) in enumerate(train_dataloader):
 
     blended_images = posisson_blending(mask, gen_imgs.detach(), masked_imgs, opt)
 
+    sample = torch.cat((masked_imgs.data, blended_images.data, imgs.data), 2)
+    save_image(sample, "images/%d.png" % i, nrow=6, normalize=True)
