@@ -4,6 +4,7 @@
 * [GAN](#gan)
     * [GAN](#gan)
     * [DCGAN](#dcgan)
+    * [WASSERSTEIN GAN](#wasserstein-gan)
 * [Image Inpainting](#image-inpainting)
     * [Context Encoders](#context-encoders)
     * [Semantic Image Inpainting with DC Models ](#semantic-image-inpainting-with-dc-models)
