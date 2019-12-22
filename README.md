@@ -1,6 +1,8 @@
 
 ## Table of Contents
 
+* [CNN](#cnn)
+    * [LeNet](#lenet)
 * [GAN](#gan)
     * [DCGAN](#dcgan)
     * [GAN](#gan)
@@ -8,6 +10,24 @@
 * [Image Inpainting](#image-inpainting)
     * [Context Encoders](#context-encoders)
     * [Semantic Image Inpainting with DC Models ](#semantic-image-inpainting-with-dc-models)
+ 
+## CNN
+
+### LeNet
+_Gradient-Based Learning Applied to Document Recognition_
+ 
+#### Authors
+Yann LeCun，Leon Botton， Yoshua Bengio，and Patrick Haffner
+
+#### Abstract
+Multilayer neural networks trained with the back-propagation algorithm constitute the best example of a successful gradient based learning technique. Given an appropriate network architecture, gradient-based learning algorithms can be used to synthesize a complex decision surface that can classify high-dimensional patterns, such as handwritten characters, with minimal preprocessing. This paper reviews various methods applied to handwritten character recognition and compares them on a standard handwritten digit recognition task. Convolutional neural networks, which are specifically designed to deal with the variability of 2D shapes, are shown to outperform all other techniques. Real-life document recognition systems are composed of multiple modules including field extraction, segmentation recognition, and language modeling. A new learning paradigm, called graph transformer networks (GTN), allows such multimodule systems to be trained globally using gradient-based methods so as to minimize an overall performance measure. Two systems for online handwriting recognition are described. Experiments demonstrate the advantage of global training, and the flexibility of graph transformer networks. A graph transformer network for reading a bank cheque is also described. It uses convolutional neural network character recognizers combined with global training techniques to provide record accuracy on business and personal cheques. It is deployed commercially and reads several million cheques per day.
+
+[[Paper]](https://www.researchgate.net/publication/2985446_Gradient-Based_Learning_Applied_to_Document_Recognition)[[Code]]()
+
+#### Run Example
+```
+$ python3 lenet.py
+```
     
 ## GAN
 
@@ -52,7 +72,7 @@ Martin Arjovsky, Soumith Chintala, Léon Bottou
 #### Abstract
 We introduce a new algorithm named WGAN, an alternative to traditional GAN training. In this new model, we show that we can improve the stability of learning, get rid of problems like mode collapse, and provide meaningful learning curves useful for debugging and hyperparameter searches. Furthermore, we show that the corresponding optimization problem is sound, and provide extensive theoretical work highlighting the deep connections to other distances between distributions.
 
-[[Paper]](https://arxiv.org/abs/1701.07875)[[Code]]()
+[[Paper]](https://arxiv.org/abs/1701.07875)[[Code]](https://github.com/gsolvit/Paper-PyTorch/tree/master/GAN/WGAN)
 
 #### Run Example
 ```
