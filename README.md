@@ -4,6 +4,7 @@
 * [CNN](#cnn)
     * [AlexNet](#alexnet)
     * [LeNet](#lenet)
+    * [Vgg](#vgg)
 * [GAN](#gan)
     * [DCGAN](#dcgan)
     * [GAN](#gan)
