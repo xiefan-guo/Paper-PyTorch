@@ -2,6 +2,7 @@
 ## Table of Contents
 
 * [CNN](#cnn)
+    * [AlexNet](#alexnet)
     * [LeNet](#lenet)
 * [GAN](#gan)
     * [DCGAN](#dcgan)
@@ -13,6 +14,22 @@
  
 ## CNN
 
+### ALexNet
+_ImageNet Classification with Deep Convolutional Neural Networks_
+
+#### Authors
+Alex Krizhevsky, Ilya Sutskever, Geoffrey E. Hinton
+
+#### Abstract
+We trained a large, deep convolutional neural network to classify the 1.2 million high-resolution images in the ImageNet LSVRC-2010 contest into the 1000 different classes. On the test data, we achieved top-1 and top-5 error rates of 37.5% and 17.0% which is considerably better than the previous state-of-the-art. The neural network, which has 60 million parameters and 650,000 neurons, consists of five convolutional layers, some of which are followed by max-pooling layers, and three fully-connected layers with a final 1000-way softmax. To make training faster, we used non-saturating neurons and a very efficient GPU implementation of the convolution operation. To reduce overfitting in the fully-connected layers we employed a recently-developed regularization method called “dropout” that proved to be very effective. We also entered a variant of this model in the ILSVRC-2012 competition and achieved a winning top-5 test error rate of 15.3%, compared to 26.2% achieved by the second-best entry.
+
+[[Paper]](http://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf)[[Code]]()
+
+#### Run Example
+```
+$ python3 alexnet.py
+```
+
 ### LeNet
 _Gradient-Based Learning Applied to Document Recognition_
  
@@ -22,7 +39,7 @@ Yann LeCun，Leon Botton， Yoshua Bengio，and Patrick Haffner
 #### Abstract
 Multilayer neural networks trained with the back-propagation algorithm constitute the best example of a successful gradient based learning technique. Given an appropriate network architecture, gradient-based learning algorithms can be used to synthesize a complex decision surface that can classify high-dimensional patterns, such as handwritten characters, with minimal preprocessing. This paper reviews various methods applied to handwritten character recognition and compares them on a standard handwritten digit recognition task. Convolutional neural networks, which are specifically designed to deal with the variability of 2D shapes, are shown to outperform all other techniques. Real-life document recognition systems are composed of multiple modules including field extraction, segmentation recognition, and language modeling. A new learning paradigm, called graph transformer networks (GTN), allows such multimodule systems to be trained globally using gradient-based methods so as to minimize an overall performance measure. Two systems for online handwriting recognition are described. Experiments demonstrate the advantage of global training, and the flexibility of graph transformer networks. A graph transformer network for reading a bank cheque is also described. It uses convolutional neural network character recognizers combined with global training techniques to provide record accuracy on business and personal cheques. It is deployed commercially and reads several million cheques per day.
 
-[[Paper]](https://www.researchgate.net/publication/2985446_Gradient-Based_Learning_Applied_to_Document_Recognition)[[Code]]()
+[[Paper]](https://www.researchgate.net/publication/2985446_Gradient-Based_Learning_Applied_to_Document_Recognition)[[Code]](https://github.com/gsolvit/Paper-PyTorch/tree/master/CNN/LeNet)
 
 #### Run Example
 ```

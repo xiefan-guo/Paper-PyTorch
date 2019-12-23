@@ -54,6 +54,7 @@ dataloader = DataLoader(
 # Models
 # ------
 class Generator(nn.Module):
+
     def __init__(self):
         super(Generator, self).__init__()
 
@@ -80,6 +81,7 @@ class Generator(nn.Module):
 
 
 class Discriminator(nn.Module):
+
     def __init__(self):
         super(Discriminator, self).__init__()
 
