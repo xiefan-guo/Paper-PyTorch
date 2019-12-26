@@ -104,3 +104,4 @@ def posisson_blending(mask, gen_imgs, masked_imgs, opt):
         )
 
     return x_optimum.detach()
+
