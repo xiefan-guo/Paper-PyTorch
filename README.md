@@ -13,7 +13,9 @@
     * [Wasserstein GAN GP](#wasserstein-gan-gp)
 * [Image Inpainting](#image-inpainting)
     * [Context Encoders](#context-encoders)
-    * [Semantic Image Inpainting with DC Models ](#semantic-image-inpainting-with-dc-models)
+    * [Generative Image Inpainting with Contextual Attention](#generative-image-inpainting-with-contextual-attention)
+    * [Globally and Locally Consistent Image Completion](#globally-and-locally-consistent-image-completion)
+    * [Semantic Image Inpainting with Deep Generative Models](#semantic-image-inpainting-with-deep-generative-models)
  
 ## CNN
 
@@ -158,14 +160,29 @@ Deepak Pathak, Philipp Krahenbuhl, Jeff Donahue, Trevor Darrell, Alexei A. Efros
 #### Abstract
 We present an unsupervised visual feature learning algorithm driven by context-based pixel prediction. By analogy with auto-encoders, we propose Context Encoders -- a convolutional neural network trained to generate the contents of an arbitrary image region conditioned on its surroundings. In order to succeed at this task, context encoders need to both understand the content of the entire image, as well as produce a plausible hypothesis for the missing part(s). When training context encoders, we have experimented with both a standard pixel-wise reconstruction loss, as well as a reconstruction plus an adversarial loss. The latter produces much sharper results because it can better handle multiple modes in the output. We found that a context encoder learns a representation that captures not just appearance but also the semantics of visual structures. We quantitatively demonstrate the effectiveness of our learned features for CNN pre-training on classification, detection, and segmentation tasks. Furthermore, context encoders can be used for semantic inpainting tasks, either stand-alone or as initialization for non-parametric methods.
 
-[[Paper]](https://arxiv.org/abs/1604.07379)[[Code]](https://github.com/gsolvit/Paper-PyTorch/tree/master/Image-Inpainting/context-encoder)
+[[Paper]](https://arxiv.org/abs/1604.07379)[[Code]](https://github.com/gsolvit/Paper-PyTorch/tree/master/Image-Inpainting/Context-Encoders)
 
 #### Run Example
 ```
 $ python3 train.py
 ```
 
-### Semantic Image Inpainting with DC Models 
+### Generative Image Inpainting with Contextual Attention
+_Generative Image Inpainting with Contextual Attention_
+
+#### Authors
+Jiahui Yu, Zhe Lin, Jimei Yang, Xiaohui Shen, Xin Lu, Thomas S. Huang
+
+#### Abstract
+Recent deep learning based approaches have shown promising results for the challenging task of inpainting large missing regions in an image. These methods can generate visually plausible image structures and textures, but often create distorted structures or blurry textures inconsistent with surrounding areas. This is mainly due to ineffectiveness of convolutional neural networks in explicitly borrowing or copying information from distant spatial locations. On the other hand, traditional texture and patch synthesis approaches are particularly suitable when it needs to borrow textures from the surrounding regions. Motivated by these observations, we propose a new deep generative model-based approach which can not only synthesize novel image structures but also explicitly utilize surrounding image features as references during network training to make better predictions. The model is a feed-forward, fully convolutional neural network which can process images with multiple holes at arbitrary locations and with variable sizes during the test time. Experiments on multiple datasets including faces (CelebA, CelebA-HQ), textures (DTD) and natural images (ImageNet, Places2) demonstrate that our proposed approach generates higher-quality inpainting results than existing ones. Code, demo and models are available at: https://github.com/JiahuiYu/generative_inpainting.
+
+[[Paper]](https://arxiv.org/abs/1801.07892)[[Code]]()
+
+### Globally and Locally Consistent Image Completion
+
+[[Paper]]()[[Code]]()
+
+### Semantic Image Inpainting with Deep Generative Models
 _Semantic Image Inpainting with Deep Generative Models_ (CVPR 2017)
 
 #### Authors
@@ -174,7 +191,7 @@ Raymond A. Yeh, Chen Chen, Teck Yian Lim, Alexander G. Schwing, Mark Hasegawa-Jo
 #### Abstract
 Semantic image inpainting is a challenging task where large missing regions have to be filled based on the available visual data. Existing methods which extract information from only a single image generally produce unsatisfactory results due to the lack of high level context. In this paper, we propose a novel method for semantic image inpainting, which generates the missing content by conditioning on the available data. Given a trained generative model, we search for the closest encoding of the corrupted image in the latent image manifold using our context and prior losses. This encoding is then passed through the generative model to infer the missing content. In our method, inference is possible irrespective of how the missing content is structured, while the state-of-the-art learning based method requires specific information about the holes in the training phase. Experiments on three datasets show that our method successfully predicts information in large missing regions and achieves pixel-level photorealism, significantly outperforming the state-of-the-art methods.
 
-[[Paper]](https://arxiv.org/abs/1607.07539)[[Code]](https://github.com/gsolvit/Paper-PyTorch/tree/master/Image-Inpainting/Semantic-Inpainting-DC-Models)
+[[Paper]](https://arxiv.org/abs/1607.07539)[[Code]](https://github.com/gsolvit/Paper-PyTorch/tree/master/Image-Inpainting/Semantic-Image-Inpainting-with-Deep-Generative-Models)
 
 #### Run Example
 ```
