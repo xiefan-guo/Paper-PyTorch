@@ -1,3 +1,6 @@
+# Multimedia Laboratory, The Chinese University of Hong Kong
+# http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html
+
 import glob
 import os
 import random
