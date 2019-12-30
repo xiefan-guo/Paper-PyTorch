@@ -23,5 +23,5 @@
 
 * _Context Encoders: Feature Learning by Inpainting_ (CVPR 2016) [[Paper]](https://arxiv.org/abs/1604.07379)[[Code]](https://github.com/gsolvit/Paper-PyTorch/tree/master/Image-Inpainting/Context-Encoders)
 * _Generative Image Inpainting with Contextual Attention_ (CVPR 2018) [[Paper]](https://arxiv.org/abs/1801.07892)[[Code]](https://github.com/gsolvit/Paper-PyTorch/tree/master/Image-Inpainting/Generative-Image-Inpainting-with-Contextual-Attention)
-* _Globally and Locally Consistent Image Completion_ (SIGGRAPH 2017) [[Paper]](http://iizuka.cs.tsukuba.ac.jp/projects/completion/data/completion_sig2017.pdf)[[Code]](https://github.com/gsolvit/Paper-PyTorch/tree/master/Image-Inpainting/Globally-and-Locally-Consistent-Image-Completion)
+* _Globally and Locally Consistent Image Completion_ (SIGGRAPH 2017) [[Paper]](http://iizuka.cs.tsukuba.ac.jp/projects/completion/data/completion_sig2017.pdf)[[Code]](https://github.com/gsolvit/Paper-PyTorch/tree/master/Image-Inpainting/Globally-and-Locally-Consistent-Image-Completion)[[Project]](http://iizuka.cs.tsukuba.ac.jp/projects/completion/en/)
 * _Semantic Image Inpainting with Deep Generative Models_ (CVPR 2017) [[Paper]](https://arxiv.org/abs/1607.07539)[[Code]](https://github.com/gsolvit/Paper-PyTorch/tree/master/Image-Inpainting/Semantic-Image-Inpainting-with-Deep-Generative-Models)
