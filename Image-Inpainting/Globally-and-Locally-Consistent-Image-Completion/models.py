@@ -187,3 +187,6 @@ class ContextDiscriminator(nn.Module):
 
         return validity
 
+
+net = CompletionNetwork()
+print(net)

@@ -1,5 +1,6 @@
 import argparse
 
+import torch
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--n_optim", type=int, default=1500, help="optim-step of training")
@@ -19,3 +20,6 @@ parser.add_argument("--checkpoint_interval", type=int, default=200, help="checkp
 parser.add_argument("--prior_weight", type=float, default=0.003, help="lambda of prior loss")
 parser.add_argument("--n_size", type=int, default=7, help="window size to W")
 opt = parser.parse_args()
+
+
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
