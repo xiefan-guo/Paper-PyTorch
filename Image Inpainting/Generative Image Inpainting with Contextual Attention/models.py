@@ -146,6 +146,7 @@ class ContextualAttentionModule(nn.Module):
 
         self.rate = rate
         self.zero_padding = nn.ZeroPad2d(1)
+        self.up_sample = nn.Upsample(scale_factor=self.rate, mode='nearest')
         self.model = nn.Sequential(
             *conv_block(in_ch, out_ch),
             *conv_block(in_ch, out_ch)
@@ -168,13 +169,16 @@ class ContextualAttentionModule(nn.Module):
         raw_f_size = foreground.size()  # B * 128 * 64 * 64
         raw_f_list_size = list(foreground.size())
         raw_b_list_size = list(background.size())
+        print("list f b size:", raw_f_list_size, raw_b_list_size)
 
         # extract patches from background with stride and rate
         extract_size = self.rate * 2
         extract_step = self.rate
         raw_patches = extract_patches(background, size=extract_size, step=extract_step)
+        print("raw_patches size:", raw_patches.size())
         # B * HW * C * K * K (B, 32 * 32, 128, 4, 4)
         raw_patches = raw_patches.contiguous().view(raw_b_list_size[0], -1, raw_b_list_size[1], extract_size, extract_size)
+        print("raw_patches size:", raw_patches.size())
         # ----------------------------------------
         # torch.contiguous()
         # Provide continuous conditions for view()
@@ -187,7 +191,9 @@ class ContextualAttentionModule(nn.Module):
 
         f_size = foreground.size()  # B * 128 * 32 * 32
         f_list_size = list(foreground.size())
+        print("f_list_size:", f_list_size)
         f_groups = torch.split(foreground, 1, dim=0)
+        print("f_groups:",len(f_groups), type(f_groups[0]), f_groups[0].size())
         # -------------------------------------------------------------------
         # torch.split(): Split tensors by batch dimension; tuple is returned
         # -------------------------------------------------------------------
@@ -196,8 +202,9 @@ class ContextualAttentionModule(nn.Module):
         b_list_size = list(background.size())
         patches = extract_patches(background)
         # B * HW * C * K * K (B, 32 * 32, 128, 3, 3)
+        print("patches size:", patches.size())
         patches = patches.contiguous().view(b_list_size[0], -1, b_list_size[1], kernel_size, kernel_size)
-
+        print("patches size:", patches.size())
         patches_groups = torch.split(patches, 1, dim=0)
         raw_patches_groups = torch.split(raw_patches, 1, dim=0)
 
@@ -205,10 +212,14 @@ class ContextualAttentionModule(nn.Module):
         if mask is not None:
             mask = down_sample(mask, scale_factor=1. / self.rate, mode="nearest")
         else:
-            mask = torch.zeros(1, 1, b_size[2], b_size[3])
+            mask = Variable(torch.zeros(1, 1, b_size[2], b_size[3])).to(device)
+
+        print("mask size:", mask.size())
 
         patches_mask = extract_patches(mask)
-        patches_mask = patches_mask.contiguous(1, 1, -1, kernel_size, kernel_size)  # B * C * HW * K * K
+        print("patches_mask size:", patches_mask.size())
+        patches_mask = patches_mask.contiguous().view(1, 1, -1, kernel_size, kernel_size)  # B * C * HW * K * K
+        print("patches_mask size:", patches_mask.size())
 
         patches_mask = patches_mask[0]  # (1, 32 * 32, 3, 3)
         patches_mask = reduce_mean(patches_mask)
@@ -230,8 +241,11 @@ class ContextualAttentionModule(nn.Module):
             # conv for compare
             i_patches = i_patches[0]
             NaN = Variable(torch.FloatTensor([1e-4])).to(device)
+            # print("l2_norm(i_patches) size:", l2_norm(i_patches).size())
             i_patches_normed = i_patches / torch.max(l2_norm(i_patches), NaN)
+            print("i_patches_normed size:", i_patches_normed.size())
             i_f_conv = F.conv2d(i_f, i_patches_normed, stride=1, padding=1)  # (B=1, C=32*32, H=32, W=32)
+            print("i_f_conv size:", i_f_conv.size())
             # ------------------------------------------------------------------------------------------------
             # torch.nn.functional.conv2d(input, weight, bias=None, stride=1, padding=0, dilation=1, groups=1)
             # input: (minibatch x in_channels x iH x iW)
@@ -255,18 +269,24 @@ class ContextualAttentionModule(nn.Module):
 
             # softmax to match
             i_f_conv = i_f_conv * eq_patches_mask  # # mm => (1, 32 * 32, 1, 1)
+            print("--------------------------\n softmax to match 1 i_f_conv:", i_f_conv.size())
             i_f_conv = F.softmax(i_f_conv * scale, dim=1)
             i_f_conv = i_f_conv * eq_patches_mask  # mask
+            print("--------------------------\n softmax to match 1 i_f_conv:", i_f_conv.size())
 
-            _, offset = torch.max(i_f_conv, dim=1)  # argmax, index
+            _, offset = torch.max(i_f_conv, dim=1)  # argmax, index (1 * 32 * 32)
 
             division = torch.div(offset, f_list_size[3]).long()
+            print("division type size", type(division), division.size())
             offset = torch.stack([division, torch.div(offset, f_list_size[3]) - division], dim=1)
+            print("offset type size", type(offset), offset.size())
 
             # deconv for patch pasting
             # 3.1 paste center
             i_raw_patches_center = i_raw_patches[0]
+            print("i_raw_patches_center size", i_raw_patches_center.size())
             i_f_conv = F.conv_transpose2d(i_f_conv, i_raw_patches_center, stride=self.rate, padding=1) / 4.  # (B=1, C=128, H=64, W=64)
+            # https://www.ptorch.com/docs/1/functional
             y.append(i_f_conv)
             offsets.append(offset)
 
@@ -285,13 +305,24 @@ class ContextualAttentionModule(nn.Module):
 
         # to flow image
         flow = torch.from_numpy(flow_to_image(offsets.permute(0, 2, 3, 1).cpu().data.numpy()))
+
         flow = flow.permute(0, 3, 1, 2)
 
         # # case2: visualize which pixels are attended
         # flow = torch.from_numpy(highlight_flow((offsets * mask.int()).numpy()))
         if self.rate != 1:
-            flow = nn.Upsample(flow, scale_factor=self.rate, mode='nearest')(flow)
-        return self.out(y), flow
+            flow = self.up_sample(flow)
+        y = Variable(y).to(device)
+        return self.model(y), flow
+
+
+net = ContextualAttentionModule(128, 128).to(device)
+print(net)
+x = Variable(torch.ones(4, 128, 64, 64)).to(device)
+out, f = net(x, x)
+print(out.size(), f.size())
+
+
 
 
 # -----------
@@ -385,3 +416,6 @@ class Discriminator(nn.Module):
         global_y = self.global_discriminator(global_x)
         local_y = self.local_discriminator(local_x)
         return global_y, local_y  # B x 256*(256 or 512)
+
+
+
