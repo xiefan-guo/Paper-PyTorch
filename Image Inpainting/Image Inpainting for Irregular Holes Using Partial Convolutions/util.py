@@ -10,3 +10,4 @@ def gram_matrix(feat):
     gram = torch.bmm(feat, feat_t) / (ch * h * w)
 
     return gram
+
