@@ -10,3 +10,10 @@ Liu et al. propose the use of partial convolutions, where the convolution is mas
 
 ### Partial Convolutional Layer
 
+Let $\mathbf{W}$ be the convolution filter weights for the convolution filter and $b$ its the corresponding bias. $\mathbf{X}$ are the feature value (pixels values) for the current convolution (sliding) window and $\mathbf{M}$ is the corresponding binary mask.
+$$
+x' = \begin{cases} \mathbf{W}^T(\mathbf{X} \odot \mathbf{M})\frac{\text{sum}(\mathbf{1})}{\text{sum}(\mathbf{M})} + b, & \text{if sum}(\mathbf{M}) > 0 \\
+0, & \text{otherwise}
+\end{cases}
+$$
+
