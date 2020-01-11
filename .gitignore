@@ -1,5 +1,6 @@
 .idea
 data
 */*/images
+*/*/mask
 */*/__pycache__
 Image-Inpainting/Semantic-Inpainting-DC-Models/checkpoints
