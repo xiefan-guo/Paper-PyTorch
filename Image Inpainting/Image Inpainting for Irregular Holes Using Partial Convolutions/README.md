@@ -54,10 +54,8 @@ $$
 ### Loss Functions
 
 $$
-\mathcal{L}_{hole}=\frac{1}{N_{\mathbf{I}_{gt}}}\Vert (1-\mathbf{M})\odot (\mathbf{I}_{out} - \mathbf{I}_{gt}) \Vert_1 \\\\
-\mathcal{L}_{valid}=\frac{1}{N_{\mathbf{I}_{gt}}}\Vert \mathbf{M}\odot (\mathbf{I}_{out} - \mathbf{I}_{gt}) \Vert_1
+\mathcal{L}_{hole}
 $$
-
 
 
 
