@@ -53,7 +53,6 @@ $$
 
 ### Loss Functions
 
-Given input image with hole $\mathbf{I}_{in}$, initial binary mask $\mathbf{M}$ ($0$ for holes), the network prediction $\mathbf{I}_{out}$, and the ground truth image $\mathbf{I}_{gt}$, we first define our per-pixel losses:
 $$
 \mathcal{L}_{hole}=\frac{1}{N_{\mathbf{I}_{gt}}}\Vert (1-\mathbf{M})\odot (\mathbf{I}_{out} - \mathbf{I}_{gt}) \Vert_1 \\\\
 \mathcal{L}_{valid}=\frac{1}{N_{\mathbf{I}_{gt}}}\Vert \mathbf{M}\odot (\mathbf{I}_{out} - \mathbf{I}_{gt}) \Vert_1
