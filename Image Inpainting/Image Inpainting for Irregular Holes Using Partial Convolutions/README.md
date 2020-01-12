@@ -51,7 +51,13 @@ $$
 | NearestUpSample7 <br> Concat7(w/ PConv1) <br> PConv15| <br> <br> $3\times 3$  | $128$<br>$128 + 64$<br>$64$ | $2$<br><br>$1$ |-<br>-<br>Y | -<br>-<br>LeakyReLU(0.2) |
 | NearestUpSample8 <br> Concat8(w/ Input) <br> PConv16| <br> <br> $3\times 3$  | $64$<br>$64 + 3$<br>$3$ | $2$<br><br>$1$ |-<br>-<br>- | -<br>-<br>- |
 
+### Loss Functions
 
+Given input image with hole $\mathbf{I}_{in}$, initial binary mask $\mathbf{M}$ ($0$ for holes), the network prediction $\mathbf{I}_{out}$, and the ground truth image $\mathbf{I}_{gt}$, we first define our per-pixel losses:
+$$
+\mathcal{L}_{hole}=\frac{1}{N_{\mathbf{I}_{gt}}}\Vert (1-\mathbf{M})\odot (\mathbf{I}_{out} - \mathbf{I}_{gt}) \Vert_1 \\\\
+\mathcal{L}_{valid}=\frac{1}{N_{\mathbf{I}_{gt}}}\Vert \mathbf{M}\odot (\mathbf{I}_{out} - \mathbf{I}_{gt}) \Vert_1
+$$
 
 
 
