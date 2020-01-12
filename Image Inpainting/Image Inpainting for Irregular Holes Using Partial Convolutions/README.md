@@ -54,9 +54,8 @@ $$
 ### Loss Functions
 
 $$
-\mathcal{L}_{hole}
+\mathcal{L}_{hole}=\frac{1}{N_{\mathbf{I}_{gt}}}
 $$
-
 
 
 
