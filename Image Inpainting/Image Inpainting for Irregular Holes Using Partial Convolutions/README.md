@@ -1,6 +1,6 @@
 # PConv
 
-PyTorch implementation of "Image Inpainting for Irregular Holes Using Partial Convolutions (ICLR 2018)" [[Paper]](https://arxiv.org/abs/1804.07723)
+PyTorch implementation of "Image Inpainting for Irregular Holes Using Partial Convolutions (ICLR 2018)" [[Paper]](https://arxiv.org/abs/1804.07723).
 
 **Authors**: _Guilin Liu, Fitsum A. Reda, Kevin J. Shih, Ting-Chun Wang, Andrew Tao, Bryan Catanzaro_
 
@@ -51,11 +51,13 @@ $$
 | NearestUpSample7 <br> Concat7(w/ PConv1) <br> PConv15| <br> <br> $3\times 3$  | $128$<br>$128 + 64$<br>$64$ | $2$<br><br>$1$ |-<br>-<br>Y | -<br>-<br>LeakyReLU(0.2) |
 | NearestUpSample8 <br> Concat8(w/ Input) <br> PConv16| <br> <br> $3\times 3$  | $64$<br>$64 + 3$<br>$3$ | $2$<br><br>$1$ |-<br>-<br>- | -<br>-<br>- |
 
-### Loss Functions
+### Training Procedure
 
-$$
-{\rm \mathcal{L}_{hole}=\frac{1}{N_{\mathbf{I}_{gt}}}}
-$$
+Liu et al. initialize the weights using the initialization method describle in "Delving Deep into Rectifiers: Surpassing Human-Level Performance on ImageNet Classification (ICCV 2015)" [[Paper]](https://arxiv.org/abs/1502.01852) and use Adam for optimization. They train on a single NVIDIA V100 GPU (16GB) with a batch size of 6.
+
+In order to use Batch Normalization in the presence of holes, they first turn on Batch Normalization for the initial training using a learning rate of $0.0002$. Then, they fine-tune using a learning rate of $0.00005$ and freeze the Batch Normalization parameters in the encoder part of the network. They keep Batch Normalization enabled in the decoder. 
+
+
 
 
 
