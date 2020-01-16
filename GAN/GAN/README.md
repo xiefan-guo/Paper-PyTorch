@@ -21,5 +21,5 @@ python gan.py
 ```
 
 $$
-\mathbb{E}_{x\sim p_{data}(x)} \left[ \log D(x) \right]
+\mathbb{E}_{x\sim p(x)} \left[ \log D(x) \right]
 $$
