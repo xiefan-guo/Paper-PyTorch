@@ -16,7 +16,7 @@
 ## GAN
 
 * **DCGAN**&emsp;_Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks_ (ICLR 2016) [[Paper]](https://arxiv.org/abs/1511.06434)[[Code]](https://github.com/gsolvit/Paper-PyTorch/blob/master/GAN/DCGAN)
-* **GAN**&emsp;_Generative Adversarial Networks_ [[Paper]](https://arxiv.org/abs/1406.2661)[[Code]](https://github.com/gsolvit/Paper-PyTorch/blob/master/GAN/GAN)
+* **GAN**&emsp;_Generative Adversarial Networks_ (NIPS 2014) [[Paper]](https://arxiv.org/abs/1406.2661)[[Code]](https://github.com/gsolvit/Paper-PyTorch/blob/master/GAN/GAN)
 * **Wasserstein GAN**&emsp;_Wasserstein GAN_ [[Paper]](https://arxiv.org/abs/1701.07875)[[Code]](https://github.com/gsolvit/Paper-PyTorch/tree/master/GAN/WGAN)
 * **Wasserstein GAN GP**&emsp;_Improved Training of Wasserstein GANs_ (NIPS 2017) [[Paper]](https://arxiv.org/abs/1704.00028)[[Code]](https://github.com/gsolvit/Paper-PyTorch/tree/master/GAN/WGAN-GP)
 

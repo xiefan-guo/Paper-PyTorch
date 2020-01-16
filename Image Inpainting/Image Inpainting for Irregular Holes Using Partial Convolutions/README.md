@@ -55,7 +55,7 @@ $$
 
 Liu et al. initialize the weights using the initialization method describle in "Delving Deep into Rectifiers: Surpassing Human-Level Performance on ImageNet Classification (ICCV 2015)" [[Paper]](https://arxiv.org/abs/1502.01852) and use Adam for optimization. They train on a single NVIDIA V100 GPU (16GB) with a batch size of 6.
 
-In order to use Batch Normalization in the presence of holes, they first turn on Batch Normalization for the initial training using a learning rate of $0.0002$. Then, they fine-tune using a learning rate of $0.00005$ and freeze the Batch Normalization parameters in the encoder part of the network. They keep Batch Normalization enabled in the decoder. 
+In order to use Batch Normalization in the presence of holes, they first turn on Batch Normalization for the initial training using a learning rate of 0.0002. Then, they fine-tune using a learning rate of 0.00005 and freeze the Batch Normalization parameters in the encoder part of the network. They keep Batch Normalization enabled in the decoder. 
 
 
 
