@@ -19,3 +19,7 @@ $$
 ```bash
 python gan.py
 ```
+
+$$
+\mathbb{E}_{a\in A}
+$$
