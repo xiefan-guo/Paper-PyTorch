@@ -8,11 +8,13 @@ PyTorch implementation of "Generative Adversarial Networks (NIPS 2014)" [[Paper]
 ### Loss functions
 
 $$
-\min_{G}\max_{D}V(G,D) = \mathbb{E}_{x\sim p_{data}(x)}\left[ \log D(x) \right] + \mathbb{E}_{x\sim p_z(z)}\left[ \log(1-D(G(z))) \right]\\\\
-\min_{G}\max_{D}V(G,D) = \mathbb{E}_{x\sim p_{data}(x)}\left[ \log D(x) \right] + \mathbb{E}_{x\sim p_z(z)}\left[- \log D(G(z)) \right]
+\min_{G}\max_{D}V(G,D) = E_{x\sim p_{data}(x)}\left[ \log D(x) \right] + E_{x\sim p_z(z)}\left[ \log(1-D(G(z))) \right]\\\\
+\min_{G}\max_{D}V(G,D) = E_{x\sim p_{data}(x)}\left[ \log D(x) \right] + E_{x\sim p_z(z)}\left[- \log D(G(z)) \right]
 $$
 
 ### Usage
+
+#### Train model
 
 ```bash
 python gan.py
