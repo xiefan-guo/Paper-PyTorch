@@ -19,7 +19,3 @@ $$
 ```bash
 python gan.py
 ```
-
-$$
-\mathbb{E}_{x\sim p(x)} \left[ \log D(x) \right]
-$$
