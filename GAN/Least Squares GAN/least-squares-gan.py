@@ -137,7 +137,7 @@ for epoch in range(opt.n_epochs):
         valid = Variable(torch.ones(imgs.size(0), 1)).to(device)
         fake = Variable(torch.zeros(imgs.size(0), 1)).to(device)
 
-         # Configure input
+        # Configure input
         real_imgs = Variable(imgs).to(device)
 
         # ------------------

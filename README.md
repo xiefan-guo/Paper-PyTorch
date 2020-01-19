@@ -15,9 +15,10 @@
 
 ## GAN
 
+* **CycleGAN**&emsp;_Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks_ (ICCV 2017) [[Paper]](https://arxiv.org/abs/1703.10593)[[Code]](https://github.com/gsolvit/Paper-PyTorch/blob/master/GAN/CycleGAN)
 * **DCGAN**&emsp;_Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks_ (ICLR 2016) [[Paper]](https://arxiv.org/abs/1511.06434)[[Code]](https://github.com/gsolvit/Paper-PyTorch/blob/master/GAN/DCGAN)
 * **GAN**&emsp;_Generative Adversarial Networks_ (NIPS 2014) [[Paper]](https://arxiv.org/abs/1406.2661)[[Code]](https://github.com/gsolvit/Paper-PyTorch/blob/master/GAN/GAN)
-* **Least Squares GAN**&emsp;_Least Squares Generative Adversarial Networks_ [[Paper]](https://arxiv.org/abs/1611.04076)[[Code]]()
+* **Least Squares GAN**&emsp;_Least Squares Generative Adversarial Networks_ [[Paper]](https://arxiv.org/abs/1611.04076)[[Code]](https://github.com/gsolvit/Paper-PyTorch/tree/master/GAN/Least%20Squares%20GAN)
 * **Wasserstein GAN**&emsp;_Wasserstein GAN_ [[Paper]](https://arxiv.org/abs/1701.07875)[[Code]](https://github.com/gsolvit/Paper-PyTorch/tree/master/GAN/WGAN)
 * **Wasserstein GAN GP**&emsp;_Improved Training of Wasserstein GANs_ (NIPS 2017) [[Paper]](https://arxiv.org/abs/1704.00028)[[Code]](https://github.com/gsolvit/Paper-PyTorch/tree/master/GAN/WGAN-GP)
 
