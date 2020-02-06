@@ -224,7 +224,7 @@ class ContextualAttentionModule(nn.Module):
         patches_mask = patches_mask[0]  # (1, 32 * 32, 3, 3)
         patches_mask = reduce_mean(patches_mask)
         eq_patches_mask = patches_mask.eq(0.).float()  # (1, 32 * 32, 1, 1)
-
+        print("eq_patches_mask: ", eq_patches_mask.size())
         y = []
         offsets = []
         k = fuse_k
