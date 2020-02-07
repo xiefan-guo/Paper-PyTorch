@@ -15,6 +15,7 @@
 
 ## GAN
 
+* **Conditional GAN**&emsp;_Conditional Generative Adversarial Nets_ [[Paper]](https://arxiv.org/abs/1411.1784)[[Code]]()
 * **CycleGAN**&emsp;_Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks_ (ICCV 2017) [[Paper]](https://arxiv.org/abs/1703.10593)[[Code]](https://github.com/gsolvit/Paper-PyTorch/blob/master/GAN/CycleGAN)
 * **DCGAN**&emsp;_Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks_ (ICLR 2016) [[Paper]](https://arxiv.org/abs/1511.06434)[[Code]](https://github.com/gsolvit/Paper-PyTorch/blob/master/GAN/DCGAN)
 * **GAN**&emsp;_Generative Adversarial Networks_ (NIPS 2014) [[Paper]](https://arxiv.org/abs/1406.2661)[[Code]](https://github.com/gsolvit/Paper-PyTorch/blob/master/GAN/GAN)
@@ -29,7 +30,7 @@
 * _Globally and Locally Consistent Image Completion_ (SIGGRAPH 2017) [[Paper]](http://iizuka.cs.tsukuba.ac.jp/projects/completion/data/completion_sig2017.pdf)[[Code]](https://github.com/gsolvit/Paper-PyTorch/tree/master/Image%20Inpainting/Globally%20and%20Locally%20Consistent%20Image%20Completion)[[Project]](http://iizuka.cs.tsukuba.ac.jp/projects/completion/en/)
 * _Image Inpainting for Irregular Holes Using Partial Convolutions_ (ICLR 2018) [[Paper]](https://arxiv.org/abs/1804.07723)[[Code]](https://github.com/gsolvit/Paper-PyTorch/tree/master/Image%20Inpainting/Image%20Inpainting%20for%20Irregular%20Holes%20Using%20Partial%20Convolutions)
 * _Semantic Image Inpainting with Deep Generative Models_ (CVPR 2017) [[Paper]](https://arxiv.org/abs/1607.07539)[[Code]](https://github.com/gsolvit/Paper-PyTorch/tree/master/Image%20Inpainting/Semantic%20Image%20Inpainting%20with%20Deep%20Generative%20Models)
-* _Shift-Net: Image Inpainting via Deep Feature Rearrangement_ (ECCV 2018) [[Paper]](https://arxiv.org/abs/1801.09392)[[Code]]()
+* _Shift-Net: Image Inpainting via Deep Feature Rearrangement_ (ECCV 2018) [[Paper]](https://arxiv.org/abs/1801.09392)[[Code]](https://github.com/gsolvit/Paper-PyTorch/tree/master/Image%20Inpainting/Shift-Net%20Image%20Inpainting%20via%20Deep%20Feature%20Rearrangement)
 
 ## Semantic Segmentation
 
