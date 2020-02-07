@@ -4,3 +4,4 @@ PyTorch implementation of "Conditional Generative Adversarial Nets" [[Paper]](ht
 
 **Authors**: _Mehdi Mirza, Simon Osindero_
 
+![](https://github.com/gsolvit/Paper-PyTorch/blob/master/GAN/Conditional%20GAN/assets/1.png)
