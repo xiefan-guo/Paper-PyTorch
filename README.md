@@ -26,7 +26,7 @@
 
 ## Image Inpainting
 
-* _Coherent Semantic Attention for Image Inpainting_ (ICCV 2019) [[Paper]](https://arxiv.org/abs/1905.12384)[[Code]]()
+* _Coherent Semantic Attention for Image Inpainting_ (ICCV 2019) [[Paper]](https://arxiv.org/abs/1905.12384)[[Code]](https://github.com/gsolvit/Paper-PyTorch/tree/master/Image%20Inpainting/Coherent%20Semantic%20Attention%20for%20Image%20Inpainting)
 * _Context Encoders: Feature Learning by Inpainting_ (CVPR 2016) [[Paper]](https://arxiv.org/abs/1604.07379)[[Code]](https://github.com/gsolvit/Paper-PyTorch/tree/master/Image%20Inpainting/Context%20Encoders-Feature%20Learning%20by%20Inpainting)
 * _Generative Image Inpainting with Contextual Attention_ (CVPR 2018) [[Paper]](https://arxiv.org/abs/1801.07892)[[Code]](https://github.com/gsolvit/Paper-PyTorch/tree/master/Image%20Inpainting/Generative%20Image%20Inpainting%20with%20Contextual%20Attention)
 * _Globally and Locally Consistent Image Completion_ (SIGGRAPH 2017) [[Paper]](http://iizuka.cs.tsukuba.ac.jp/projects/completion/data/completion_sig2017.pdf)[[Code]](https://github.com/gsolvit/Paper-PyTorch/tree/master/Image%20Inpainting/Globally%20and%20Locally%20Consistent%20Image%20Completion)[[Project]](http://iizuka.cs.tsukuba.ac.jp/projects/completion/en/)
