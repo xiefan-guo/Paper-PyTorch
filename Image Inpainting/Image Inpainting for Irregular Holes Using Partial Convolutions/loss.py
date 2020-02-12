@@ -4,10 +4,11 @@ import torch.nn as nn
 from util import gram_matrix
 
 
-def total_variation_loss(img):
-    # shift one pixel and get difference
-    loss = torch.mean(torch.abs(img[:, :, :, 1:] - img[:, :, :, :-1])) + \
-           torch.mean(torch.abs(img[:, :, 1:, :] - img[:, :, :-1, :]))
+def total_variation_loss(image):
+
+    # shift one pixel and get difference (for both x and y direction)
+    loss = torch.mean(torch.abs(image[:, :, :, :-1] - image[:, :, :, 1:])) + \
+        torch.mean(torch.abs(image[:, :, :-1, :] - image[:, :, 1:, :]))
 
     return loss
 
@@ -23,7 +24,7 @@ class TotalLoss(nn.Module):
     def forward(self, img, mask, output, gt):
 
         loss_dict = {}
-        comp = mask * gt + (1 - mask) * output
+        comp = mask * img + (1 - mask) * output
 
         loss_dict['hole'] = self.l1((1 - mask) * output, (1 - mask) * gt)
         loss_dict['valid'] = self.l1(mask * output, mask * gt)
@@ -41,8 +42,8 @@ class TotalLoss(nn.Module):
 
         loss_dict['perceptual'] = 0.0
         for i in range(3):
-            loss_dict['perceptual'] += self.l1(feat_output, feat_gt)
-            loss_dict['perceptual'] += self.l1(feat_comp, feat_gt)
+            loss_dict['perceptual'] += self.l1(feat_output[i], feat_gt[i])
+            loss_dict['perceptual'] += self.l1(feat_comp[i], feat_gt[i])
 
         loss_dict['style'] = 0.0
         for i in range(3):
