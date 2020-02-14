@@ -1,6 +1,6 @@
 # PConv
 
-PyTorch implementation of "Image Inpainting for Irregular Holes Using Partial Convolutions (ICLR 2018)" [[Paper]](https://arxiv.org/abs/1804.07723).
+PyTorch implementation of "Image Inpainting for Irregular Holes Using Partial Convolutions (ECCV 2018)" [[Paper]](https://arxiv.org/abs/1804.07723).
 
 **Authors**: _Guilin Liu, Fitsum A. Reda, Kevin J. Shih, Ting-Chun Wang, Andrew Tao, Bryan Catanzaro_
 
