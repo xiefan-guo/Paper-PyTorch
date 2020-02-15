@@ -191,7 +191,7 @@ class PConvUNet(nn.Module):
         # ---------------------------------------------------------
         # Override the default train() to freeze the BN parameters
         # ---------------------------------------------------------
-        super(PConvUNet, self).train(mode)
+        super(PConvUNet, self).train(mode)  # 把父类的train()执行
         if self.freeze_enc_bn:
             for name, module in self.named_modules():
                 if isinstance(module, nn.BatchNorm2d) and 'enc' in name:

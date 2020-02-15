@@ -3,6 +3,7 @@ import argparse
 import numpy as np
 
 import torch
+from torch.autograd import Variable
 from tensorboardX import SummaryWriter
 from torchvision import transforms
 from torchvision.utils import save_image
@@ -23,12 +24,12 @@ parser.add_argument('--save_dir', type=str, default='snapshots/default')
 parser.add_argument('--log_dir', type=str, default='logs/default')
 parser.add_argument('--lr', type=float, default=0.0002)
 parser.add_argument('--lr_finetune', type=float, default=0.00005)
-parser.add_argument('--n_epochs', type=int, default=20)  # 1000000
+parser.add_argument('--n_epochs', type=int, default=1000)  # 1000000
 parser.add_argument('--batch_size', type=int, default=6)
 parser.add_argument('--n_threads', type=int, default=6)
-parser.add_argument('--save_model_interval', type=int, default=5)  # 50000
-parser.add_argument('--vis_interval', type=int, default=1)  # 5000
-parser.add_argument('--log_interval', type=int, default=5)
+parser.add_argument('--save_model_interval', type=int, default=100)  # 50000
+parser.add_argument('--vis_interval', type=int, default=20)  # 5000
+parser.add_argument('--log_interval', type=int, default=200)
 parser.add_argument('--img_size', type=int, default=256)
 parser.add_argument('--resume', type=str)
 parser.add_argument('--finetune', action='store_true')  # 默认false，加参数--finetune选项为true
@@ -68,7 +69,9 @@ iterator_train = DataLoader(
 
 net = PConvUNet().to(device)
 
+# opt.finetune = True
 if opt.finetune:
+    print('finetune')
     lr = opt.lr_finetune
     net.freeze_enc_bn = True
 else:
@@ -97,7 +100,7 @@ for epoch in range(start_iter, opt.n_epochs):
     net.train()
     for i, (image, mask, gt) in enumerate(iterator_train):
 
-        image, mask, gt = image.to(device), mask.to(device), gt.to(device)
+        image, mask, gt = Variable(image).to(device), Variable(mask, requires_grad=False).to(device), Variable(gt).to(device)
 
         output, _ = net(image, mask)
         loss_dict = criterion(image, mask, output, gt)
