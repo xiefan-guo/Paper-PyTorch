@@ -118,7 +118,7 @@ for epoch in range(opt.n_epochs):
 
          # Configure input
         real_imgs = Variable(imgs).to(device)
-
+        # print('real_imgs', real_imgs.shape)
         # ------------------
         # Training generator
         # ------------------
