@@ -13,7 +13,7 @@ import torch
 import torchvision.transforms.functional as F
 from torch.utils.data import DataLoader, Dataset
 
-from util import create_mask
+from .util import create_mask
 
 
 class ImageDataset(Dataset):

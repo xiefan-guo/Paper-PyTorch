@@ -3,8 +3,8 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 
-from network import InpaintGenerator, EdgeGenerator, Discriminator
-from loss import AdversarialLoss, PerceptualLoss, StyleLoss
+from .network import InpaintGenerator, EdgeGenerator, Discriminator
+from .loss import AdversarialLoss, PerceptualLoss, StyleLoss
 
 
 class BaseModel(nn.Module):
