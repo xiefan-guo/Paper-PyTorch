@@ -124,12 +124,12 @@ for epoch in range(start_iter, opt.n_epochs):
         )
 
         if ((epoch + 1) % opt.save_model_interval == 0 or (epoch + 1) == opt.n_epochs) and i == len(iterator_train) - 1:
-            save_ckpt('{:s}/ckpt/{:d}.pth'.format(opt.save_dir, epoch + 1),
+            save_ckpt('{:s}/ckpt/new_{:d}.pth'.format(opt.save_dir, epoch + 1),
                       [('model', net)], [('optimizer', optimizer)], epoch + 1)
 
         if ((epoch + 1) % opt.vis_interval == 0) and i == len(iterator_train) - 1:
             net.eval()
             evaluate(net, dataset_val, device,
-                     '{:s}/images/test_{:d}.jpg'.format(opt.save_dir, epoch + 1))
+                     '{:s}/images/new_test_{:d}.jpg'.format(opt.save_dir, epoch + 1))
 
 writer.close()

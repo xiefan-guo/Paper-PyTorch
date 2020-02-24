@@ -86,7 +86,9 @@ def load_config(mode=None):
     # copy config template if does't exist
     if not os.path.exists(config_path):
         # copyfile('./config.yml.example', config_path)
+        print('Copy config....')
         copyfile('./config.yml', config_path)
+        print('End copy config...')
 
     # load config file
     config = Config(config_path)

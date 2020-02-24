@@ -188,12 +188,16 @@ class ImageDataset(Dataset):
         # flist: image file path, image directory path, text file flist path
         # ------------------------------------------------------------------
         if isinstance(flist, str):
+            # print('the flist is str')
+            # flist  绝对路径
             if os.path.isdir(flist):
+                # print('the flist is dir')
                 flist = list(glob.glob(flist + '/*.jpg')) + list(glob.glob(flist + '*/png'))
                 flist.sort()
                 return flist
 
             if os.path.isfile(flist):
+                # print('the flist is file')
                 try:
                     return np.genfromtxt(flist, dtype=np.str, encoding='utf-8')
                 except:

@@ -7,7 +7,7 @@ class Config(dict):
     def __init__(self, config_path):
         with open(config_path, 'r') as f:
             self._yaml = f.read()
-            self._dict = yaml.load(self._yaml)
+            self._dict = yaml.load(self._yaml, Loader=yaml.FullLoader)
             self._dict['PATH'] = os.path.dirname(config_path)  # 去掉文件名，返回目录
 
     def __getattr__(self, item):
@@ -16,6 +16,8 @@ class Config(dict):
 
         if DEFAULT_CONFIG.get(item) is not None:
             return DEFAULT_CONFIG[item]
+
+        return None
 
     def print(self):
         print('Model configurations:')

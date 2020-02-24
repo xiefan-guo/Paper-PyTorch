@@ -96,6 +96,8 @@ class EdgeConnect():
     # --------
     def train(self):
 
+        print('the length of train dataset.', len(self.train_dataset))
+
         train_loader = DataLoader(
             dataset=self.train_dataset,
             batch_size=self.config.BATCH_SIZE,
@@ -107,7 +109,7 @@ class EdgeConnect():
         epoch = 0
         keep_training = True
         model = self.config.MODEL
-        max_iteration = int(self.config.MAX_ITERS)
+        max_iteration = int(float(self.config.MAX_ITERS))
         total = len(self.train_dataset)
 
         if total == 0:
@@ -122,6 +124,8 @@ class EdgeConnect():
             progbar = Progbar(total, width=20, stateful_metrics=['epoch', 'iter'])
 
             for items in train_loader:
+
+                print('item: ', items)
 
                 self.edge_model.train()
                 self.inpainting_model.train()

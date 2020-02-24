@@ -58,6 +58,9 @@ class PartialConv(nn.Module):
     def __init__(self, in_channels, out_channels, kernel_size, stride=1, padding=0, dilation=1, groups=1, bias=True):
         super(PartialConv, self).__init__()
 
+        self.kernel_size = kernel_size
+        self.in_channels = in_channels
+
         self.img_conv = nn.Conv2d(in_channels, out_channels, kernel_size=kernel_size, stride=stride, padding=padding, bias=bias)
         self.mask_conv = nn.Conv2d(in_channels, out_channels, kernel_size=kernel_size, stride=stride, padding=padding, bias=False)
 
@@ -84,9 +87,10 @@ class PartialConv(nn.Module):
             output_mask = self.mask_conv(mask)
 
         no_update_holes = output_mask == 0
-        mask_sum = output_mask.masked_fill_(no_update_holes, 1.0)
+        mask_sum = output_mask.masked_fill_(no_update_holes, 1.0)  # 防止 / 0
 
-        output_pre = (output - output_bias) / mask_sum + output_bias
+        output_pre = (output - output_bias) / mask_sum * (self.kernel_size * self.kernel_size * self.in_channels)\
+                     + output_bias
         output = output_pre.masked_fill_(no_update_holes, 0.0)
 
         new_mask = torch.ones_like(output)
